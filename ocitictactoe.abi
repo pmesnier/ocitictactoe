@@ -1,0 +1,138 @@
+{
+    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT ",
+    "version": "eosio::abi/1.1",
+    "types": [],
+    "structs": [
+        {
+            "name": "create",
+            "base": "",
+            "fields": [
+                {
+                    "name": "host",
+                    "type": "name"
+                },
+                {
+                    "name": "challenger",
+                    "type": "name"
+                }
+            ]
+        },
+        {
+            "name": "erase",
+            "base": "",
+            "fields": [
+                {
+                    "name": "host",
+                    "type": "name"
+                },
+                {
+                    "name": "challenger",
+                    "type": "name"
+                }
+            ]
+        },
+        {
+            "name": "game",
+            "base": "",
+            "fields": [
+                {
+                    "name": "challenger",
+                    "type": "name"
+                },
+                {
+                    "name": "host",
+                    "type": "name"
+                },
+                {
+                    "name": "turn",
+                    "type": "name"
+                },
+                {
+                    "name": "winner",
+                    "type": "name"
+                },
+                {
+                    "name": "board",
+                    "type": "uint8[]"
+                }
+            ]
+        },
+        {
+            "name": "move",
+            "base": "",
+            "fields": [
+                {
+                    "name": "host",
+                    "type": "name"
+                },
+                {
+                    "name": "challenger",
+                    "type": "name"
+                },
+                {
+                    "name": "by",
+                    "type": "name"
+                },
+                {
+                    "name": "row",
+                    "type": "uint32"
+                },
+                {
+                    "name": "column",
+                    "type": "uint32"
+                }
+            ]
+        },
+        {
+            "name": "restart",
+            "base": "",
+            "fields": [
+                {
+                    "name": "host",
+                    "type": "name"
+                },
+                {
+                    "name": "challenger",
+                    "type": "name"
+                },
+                {
+                    "name": "by",
+                    "type": "name"
+                }
+            ]
+        }
+    ],
+    "actions": [
+        {
+            "name": "create",
+            "type": "create",
+            "ricardian_contract": "---\ntitle: Create A Game\nsummary: Adds a row to the games table\nicon: ICON\n---\n\nParameter set contains host & challenger names to define the game. Host always plays X and goes first.\nAuthority for creating a game is the action key for the \"host\" account."
+        },
+        {
+            "name": "erase",
+            "type": "erase",
+            "ricardian_contract": "---\ntitle: Destroy A Game\nsummary: Erases a row from the games table\nicon: ICON\n---\n\nParameter set contains host & challenger names and a \"by\" name identifying who is erasing the game.\nAuthority for the game is the action key for the \"by\" account"
+        },
+        {
+            "name": "move",
+            "type": "move",
+            "ricardian_contract": "---\ntitle: Take a turn\nsummary: Marks a cell as containing an x or an o\nicon: ICON\n---\n\nParameter set contains host & challenger names, identifying the game in the games table, the 0-indexed row and column of the move and a \"by\" name identifying who is moving.\nAuthority for the game is the action key for the \"by\" account.\nThe turn is validated to confirm the player making the turn is the next up, and that the cell moving into is empty."
+        },
+        {
+            "name": "restart",
+            "type": "restart",
+            "ricardian_contract": "---\ntitle: Start a new game\nsummary: Clears the game state in the games table\nicon: ICON\n---\n\nParameter set contains host & challenger names and a \"by\" name identifying who is restarting.\nAuthority for the game is the action key for the \"by\" account. The \"by\" player must match either the host or the challenger."
+        }
+    ],
+    "tables": [
+        {
+            "name": "games",
+            "type": "game",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        }
+    ],
+    "ricardian_clauses": [],
+    "variants": []
+}
